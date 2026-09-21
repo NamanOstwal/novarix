@@ -1,12 +1,17 @@
-import { COMPANY, NAV_LINKS } from '../brand'
+import { COMPANY, DOMAIN, NAV_LINKS } from '../brand'
+import { LogoMark } from './LogoMark'
 
 export function Footer() {
   return (
     <footer className="footer">
       <div className="wrap footer-grid">
         <div className="footer-brand">
-          <p className="logo-word">{COMPANY}</p>
+          <div className="footer-logo">
+            <LogoMark size={28} />
+            <p className="logo-word">{COMPANY}</p>
+          </div>
           <p>AI automation for operations teams.</p>
+          <p className="footer-domain">{DOMAIN}</p>
         </div>
         <div>
           <p className="footer-h">Explore</p>

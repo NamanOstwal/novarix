@@ -1,4 +1,6 @@
-export const COMPANY = 'Veyra'
+export const COMPANY = 'Axiom Works'
+export const DOMAIN = 'axiomworks.ai'
+export const TAGLINE = 'Intelligent AI Automation for Modern Operations'
 
 export const NAV_LINKS = [
   { href: '#solutions', label: 'Solutions' },

@@ -1,17 +1,14 @@
 import { Reveal } from './Reveal'
+import { COMPANY } from '../brand'
 
 const NODES = [
-  'AI Models',
-  'APIs',
-  'Databases',
-  'Cloud Platforms',
-  'CRMs',
-  'Communication Tools',
   'ERP Systems',
-  'Internal Software',
-  'Workflow Engines',
-  'Webhooks',
-  'RPA',
+  'CRM Platforms',
+  'Custom Internal Tools',
+  'SQL / NoSQL DBs',
+  'REST & GraphQL APIs',
+  'Email & Slack Channels',
+  'Document Stores',
   'Data Pipelines',
 ]
 
@@ -23,7 +20,7 @@ export function Technology() {
           <p className="eyebrow">Stack</p>
           <h2 id="tech-title">Built around your existing stack.</h2>
           <p className="lede">
-            Veyra is an automation layer — not a replacement for the software
+            {COMPANY} is an automation layer — not a replacement for the software
             you already run.
           </p>
         </Reveal>

@@ -1,27 +1,28 @@
-import { ConsultButton } from './Button'
 import { Reveal } from './Reveal'
+import { ConsultButton } from './Button'
+import { COMPANY } from '../brand'
 
 const MODELS = [
   {
-    title: 'Workflow Audit',
-    copy: 'Identify high-value automation opportunities inside the business.',
+    title: 'Consultation & Discovery',
+    copy: 'We review your workflows, systems, and repetitive tasks to identify where automation delivers the highest return on investment.',
   },
   {
-    title: 'Fixed-Scope Automation',
-    copy: 'Build a specific automation workflow from discovery to deployment.',
+    title: 'Custom Automation Architecture',
+    copy: 'We design bespoke AI workflows and integrations tailored specifically to your data schema, security requirements, and team processes.',
   },
   {
-    title: 'Ongoing Automation Partner',
-    copy: 'Continuously build, maintain, monitor, and improve automation systems.',
+    title: 'Contract Build & Deployment',
+    copy: 'We build, test, and deploy production-ready automations without disrupting day-to-day operations.',
   },
   {
-    title: 'Custom Enterprise Engagement',
-    copy: 'Design larger interconnected automation systems across multiple teams and platforms.',
+    title: 'Ongoing Monitoring & Maintenance',
+    copy: 'We ensure automations stay reliable as software updates, APIs evolve, and business edge cases emerge.',
   },
 ]
 
 const NEXT_STEPS = [
-  'Book a 30-minute workflow call',
+  'Understand what is slowing your team down',
   'Share the systems and manual steps involved',
   'Receive a practical recommendation and next scope',
 ]
@@ -34,7 +35,7 @@ export function Engagement() {
           <p className="eyebrow">Engagement model</p>
           <h2 id="eng-title">Automation, delivered as a service.</h2>
           <p className="lede">
-            Veyra designs, builds, and operates automation on a contract and
+            {COMPANY} designs, builds, and operates automation on a contract and
             project basis — not as a self-serve product you have to assemble
             yourself.
           </p>

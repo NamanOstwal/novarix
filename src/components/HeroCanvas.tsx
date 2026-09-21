@@ -121,7 +121,7 @@ function Node({
     <g transform={`translate(${x} ${y})`}>
       <rect width={w} height="44" rx="12" fill="#fff" stroke="rgba(18,19,23,0.12)" />
       <circle cx="18" cy="22" r="4.5" fill="#6A27FF" />
-      <text x="32" y="26" fill="#141414" fontSize="11.5" fontFamily="IBM Plex Sans, sans-serif">
+      <text x="32" y="26" fill="#141414" fontSize="11.5" fontFamily="'Libre Baskerville', Georgia, serif">
         {label}
       </text>
     </g>

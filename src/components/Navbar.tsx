@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { COMPANY, NAV_LINKS } from '../brand'
 import { ConsultButton } from './Button'
+import { LogoMark } from './LogoMark'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -26,11 +27,7 @@ export function Navbar() {
     <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
       <div className="nav-inner">
         <a href="#top" className="logo" onClick={close} aria-label={`${COMPANY} home`}>
-          <span className="logo-mark" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
+          <LogoMark size={28} />
           <span className="logo-word">{COMPANY}</span>
         </a>
 

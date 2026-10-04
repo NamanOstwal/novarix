@@ -171,6 +171,7 @@ export const Playground: FC = () => {
 
         {/* Superconscious Segmented Category Control */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -183,6 +184,7 @@ export const Playground: FC = () => {
             border: '1px solid rgba(255, 255, 255, 0.12)',
             boxShadow: '0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
             maxWidth: '100%',
           }}
         >
@@ -265,19 +267,20 @@ export const Playground: FC = () => {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
                   minHeight: '480px',
                 }}
               >
                 {/* Left Side: Call Visualizer with User's Logo */}
                 <div
                   style={{
-                    padding: '36px',
+                    padding: 'clamp(20px, 4vw, 36px)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                     backgroundColor: 'rgba(255, 255, 255, 0.015)',
                   }}
                 >
@@ -414,7 +417,7 @@ export const Playground: FC = () => {
                 {/* Right Side: High-End Chat Transcript */}
                 <div
                   style={{
-                    padding: '36px',
+                    padding: 'clamp(20px, 4vw, 36px)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
@@ -525,9 +528,9 @@ export const Playground: FC = () => {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  padding: '36px',
-                  gap: '32px',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+                  padding: 'clamp(18px, 4vw, 36px)',
+                  gap: 'clamp(18px, 3vw, 32px)',
                 }}
               >
                 {/* Document Scan Preview HUD */}
@@ -727,9 +730,9 @@ export const Playground: FC = () => {
             {activeTab === 'translate' && (
               <div
                 style={{
-                  padding: '36px',
+                  padding: 'clamp(18px, 4vw, 36px)',
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
                   gap: '24px',
                 }}
               >

@@ -532,13 +532,24 @@ export const IntegrationsShowcase: FC = () => {
           boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.06)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', color: 'rgba(255, 255, 255, 0.65)' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px 14px',
+            fontSize: '12px',
+            color: 'rgba(255, 255, 255, 0.65)',
+            textAlign: 'center',
+          }}
+        >
           <span style={{ color: '#00F0FF', fontWeight: 600 }}>● Instant Zero-ETL Connectors</span>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+          <span className="hidden sm:inline" style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
           <span>REST & GraphQL APIs</span>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+          <span className="hidden sm:inline" style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
           <span>Real-time CDC Vector Streams</span>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+          <span className="hidden sm:inline" style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
           <span>Air-Gapped VPC Peering</span>
         </div>
       </div>

@@ -147,7 +147,7 @@ x-novarix-region: bom1-sovereign
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '24px',
             alignItems: 'stretch',
           }}
@@ -158,7 +158,7 @@ x-novarix-region: bom1-sovereign
             <div
               className="sc-card-body"
               style={{
-                padding: '32px',
+                padding: 'clamp(18px, 4vw, 32px)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -359,7 +359,7 @@ x-novarix-region: bom1-sovereign
 
           {/* Right Column: 2x2 Feature Bento Grid */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '16px', flex: 1 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '16px', flex: 1 }}>
               
               {/* Card 1: Text to Speech */}
               <div className="sc-bento-tile" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -460,7 +460,7 @@ x-novarix-region: bom1-sovereign
             </div>
 
             {/* Bottom 3 Developer Telemetry Pills */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 130px), 1fr))', gap: '10px' }}>
               <div className="sc-bento-tile" style={{ padding: '16px' }}>
                 <div style={{ fontFamily: 'var(--font-matter)', fontSize: '14.5px', fontWeight: 600, color: '#FFFFFF' }}>OpenAPI Spec</div>
                 <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>Fully typed REST endpoints</div>

@@ -69,7 +69,7 @@ export const PlatformArchitecture: FC = () => {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
               <div style={{ padding: '22px', backgroundColor: 'rgba(255,255,255,0.025)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', transition: 'border-color 0.25s ease' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                   <div className="sc-icon-pod" style={{ width: '36px', height: '36px' }}>
@@ -146,7 +146,7 @@ export const PlatformArchitecture: FC = () => {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
               <div style={{ padding: '22px', backgroundColor: 'rgba(255,255,255,0.025)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ fontWeight: 600, fontSize: '16px', color: 'var(--neon-cyan)', marginBottom: '6px' }}>Novarix Reasoner-V4</div>
                 <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>Complex policy logic, mathematical checks, deterministic audit planning.</p>
@@ -190,7 +190,7 @@ export const PlatformArchitecture: FC = () => {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px' }}>
               <div style={{ padding: '22px', backgroundColor: 'rgba(255,255,255,0.025)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ fontWeight: 600, fontSize: '16px', color: '#10B981', marginBottom: '6px' }}>Sub-100ms Bare Metal</div>
                 <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: '1.5' }}>Hardware-optimized FlashAttention kernels for rapid real-time response.</p>

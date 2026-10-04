@@ -1,11 +1,60 @@
-import { useRef, type FC, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type FC, type MouseEvent } from 'react'
 import { useConsult } from '../context/ConsultContext'
 import { ParticlesBackground } from './ParticlesBackground'
+import { SlimyBlobCanvas } from './SlimyBlobCanvas'
 import { IntegrationsShowcase } from './IntegrationsShowcase'
 
 export const Hero: FC = () => {
   const { openConsult } = useConsult()
   const btnRef = useRef<HTMLButtonElement>(null)
+  const desktopVideoRef = useRef<HTMLVideoElement>(null)
+  const mobileVideoRef = useRef<HTMLVideoElement>(null)
+  const [desktopVideoPlaying, setDesktopVideoPlaying] = useState(false)
+  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false)
+
+  // Robust programmatic video play trigger for iOS Safari, Android, and WebViews
+  useEffect(() => {
+    const startVideo = (video: HTMLVideoElement | null, setPlaying: (val: boolean) => void) => {
+      if (!video) return
+      video.muted = true
+      video.defaultMuted = true
+      video.playsInline = true
+      video.setAttribute('playsinline', 'true')
+      video.setAttribute('webkit-playsinline', 'true')
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setPlaying(true)
+          })
+          .catch(() => {
+            // Autoplay delayed or restricted by mobile battery-saver mode.
+            // SlimyBlobCanvas continues running underneath seamlessly!
+          })
+      }
+    }
+
+    startVideo(desktopVideoRef.current, setDesktopVideoPlaying)
+    startVideo(mobileVideoRef.current, setMobileVideoPlaying)
+
+    // Touch resume listener: the moment mobile user touches or scrolls, resume videos immediately
+    const resumeOnInteraction = () => {
+      startVideo(desktopVideoRef.current, setDesktopVideoPlaying)
+      startVideo(mobileVideoRef.current, setMobileVideoPlaying)
+    }
+
+    window.addEventListener('touchstart', resumeOnInteraction, { once: true, passive: true })
+    window.addEventListener('touchend', resumeOnInteraction, { once: true, passive: true })
+    window.addEventListener('click', resumeOnInteraction, { once: true, passive: true })
+    window.addEventListener('scroll', resumeOnInteraction, { once: true, passive: true })
+
+    return () => {
+      window.removeEventListener('touchstart', resumeOnInteraction)
+      window.removeEventListener('touchend', resumeOnInteraction)
+      window.removeEventListener('click', resumeOnInteraction)
+      window.removeEventListener('scroll', resumeOnInteraction)
+    }
+  }, [])
 
   const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
     if (!btnRef.current) return
@@ -23,13 +72,29 @@ export const Hero: FC = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '160px',
+        paddingTop: 'clamp(115px, 15vh, 160px)',
         minHeight: '94vh',
         overflow: 'hidden',
         backgroundColor: '#0C0B0C',
       }}
     >
-      {/* Superconscious Giant Slimy Blob Background Animation - Seamless Embedded Blend */}
+      {/* 1. Guaranteed Living Slimy Fluid Blob Simulation (Always running at 60fps on mobile & desktop) */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 1,
+        }}
+      >
+        <SlimyBlobCanvas />
+      </div>
+
+      {/* 2. Superconscious High-Resolution Video Layer (Desktop + Mobile Portrait) */}
       <div
         className="hero-video-area"
         style={{
@@ -39,57 +104,93 @@ export const Hero: FC = () => {
           height: '100%',
           overflow: 'hidden',
           pointerEvents: 'none',
-          zIndex: 1,
+          zIndex: 2,
+          maskImage: 'linear-gradient(180deg, #000 0%, #000 88%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(180deg, #000 0%, #000 88%, transparent 100%)',
         }}
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          controls={false}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: 0.88,
-            mixBlendMode: 'screen',
-            filter: 'contrast(145%) brightness(0.85) saturate(175%)',
-          }}
-        >
-          <source src="/assets/blob-hero.mp4" type="video/mp4" />
-        </video>
+        {/* Desktop Video (Screen width >= 768px) */}
+        <div className="hidden md:block" style={{ width: '100%', height: '100%' }}>
+          <video
+            ref={desktopVideoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controls={false}
+            onPlaying={() => setDesktopVideoPlaying(true)}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: desktopVideoPlaying ? 0.92 : 0,
+              transition: 'opacity 0.6s ease',
+              filter: 'contrast(135%) brightness(0.92) saturate(160%)',
+            }}
+          >
+            <source src="/assets/blob-hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* Mobile Portrait Video (Screen width < 768px - Superconscious phone optimized) */}
+        <div className="block md:hidden" style={{ width: '100%', height: '100%' }}>
+          <video
+            ref={mobileVideoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controls={false}
+            onPlaying={() => setMobileVideoPlaying(true)}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: mobileVideoPlaying ? 0.95 : 0,
+              transition: 'opacity 0.6s ease',
+              filter: 'contrast(130%) brightness(0.95) saturate(165%)',
+            }}
+          >
+            <source src="/assets/blob-hero-mobile.mp4" type="video/mp4" />
+            <source src="/assets/blob-hero.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
 
-      {/* 4-Way Seamless Boundary Dissolve Gradients - Completely eradicates any rectangular border or layer cutoff */}
+      {/* 3. 4-Way Seamless Boundary Dissolve Gradients */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'linear-gradient(180deg, #0C0B0C 0%, rgba(12, 11, 12, 0.85) 12%, transparent 28%, transparent 72%, rgba(12, 11, 12, 0.9) 88%, #0C0B0C 100%), linear-gradient(90deg, #0C0B0C 0%, rgba(12, 11, 12, 0.85) 10%, transparent 25%, transparent 75%, rgba(12, 11, 12, 0.85) 90%, #0C0B0C 100%)',
+            'linear-gradient(180deg, #0C0B0C 0%, rgba(12, 11, 12, 0.6) 12%, transparent 28%, transparent 72%, rgba(12, 11, 12, 0.75) 88%, #0C0B0C 100%), linear-gradient(90deg, #0C0B0C 0%, rgba(12, 11, 12, 0.6) 8%, transparent 24%, transparent 76%, rgba(12, 11, 12, 0.6) 92%, #0C0B0C 100%)',
           pointerEvents: 'none',
-          zIndex: 2,
+          zIndex: 3,
         }}
       />
 
-      {/* Radial Center Aperture Vignette */}
+      {/* Desktop Radial Center Aperture Vignette (hidden on mobile to prevent choking the phone screen) */}
       <div
+        className="hidden md:block"
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse 75% 65% at 50% 45%, transparent 35%, rgba(12, 11, 12, 0.75) 65%, #0C0B0C 95%)',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 45%, transparent 40%, rgba(12, 11, 12, 0.6) 72%, #0C0B0C 98%)',
           pointerEvents: 'none',
-          zIndex: 2,
+          zIndex: 3,
         }}
       />
 
       {/* Superconscious Cosmic Background Particles */}
-      <ParticlesBackground particleCount={55} />
+      <ParticlesBackground particleCount={45} />
 
       {/* Superconscious Cosmic Blur Ellipse */}
       <div className="cosmic-blur-ellipse" />

@@ -322,6 +322,25 @@ button {
   }
 }
 
+@keyframes mobileDrawerSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* --------------------------------------------------------------------------
    6. Superconscious Buttons
    -------------------------------------------------------------------------- */
@@ -773,4 +792,37 @@ button {
   background-color: var(--neon-cyan);
   box-shadow: 0 0 8px var(--neon-cyan);
 }
+
+/* Mobile Smooth Drawer Slide Animation */
+@keyframes mobileDrawerSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Universal scrollbar suppressor for native mobile feel */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* High-performance hardware composite helper for mobile animations */
+.gpu-accel {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
 

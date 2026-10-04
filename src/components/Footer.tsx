@@ -52,7 +52,7 @@ export const Footer: FC = () => {
           }}
         >
           {/* Brand Info & Mission (Address removed as requested, impressive badges added) */}
-          <div style={{ gridColumn: 'span 2', maxWidth: '360px' }}>
+          <div className="col-span-1 md:col-span-2" style={{ maxWidth: '380px' }}>
             <NovarixLogo height={34} withGlow />
 
             <p

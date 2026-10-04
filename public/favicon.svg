@@ -1,21 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#1E2033" />
+  <path
+    d="M32 10C34.5 22 42 29.5 54 32C42 34.5 34.5 42 32 54C29.5 42 22 34.5 10 32C22 29.5 29.5 22 32 10Z"
+    fill="url(#grad)"
+  />
+  <circle cx="32" cy="32" r="3.5" fill="#FFFFFF" />
   <defs>
-    <linearGradient id="axiom-accent" x1="6" y1="24" x2="26" y2="8" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#6A27FF"/>
-      <stop offset="50%" stopColor="#3AD7E0"/>
-      <stop offset="100%" stopColor="#C8F04D"/>
-    </linearGradient>
-    <linearGradient id="axiom-bridge" x1="10" y1="18" x2="22" y2="18" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stopColor="#6A27FF"/>
-      <stop offset="100%" stopColor="#C8F04D"/>
+    <linearGradient id="grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C7D2FE" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#4F46E5" />
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="8" fill="#121317"/>
-  <rect width="32" height="32" rx="8" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
-  <path d="M8 24 L16 8 L24 24" stroke="#EDEAE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11 18 H21" stroke="url(#axiom-bridge)" stroke-width="2.2" stroke-linecap="round"/>
-  <circle cx="16" cy="8" r="2.2" fill="#6A27FF" stroke="#EDEAE3" stroke-width="0.8"/>
-  <circle cx="8" cy="24" r="1.8" fill="#C8F04D"/>
-  <circle cx="24" cy="24" r="1.8" fill="#3AD7E0"/>
-  <circle cx="16" cy="18" r="1.6" fill="url(#axiom-accent)"/>
 </svg>

@@ -1,11 +1,13 @@
-export const COMPANY = 'Axiom Works'
-export const DOMAIN = 'axiomworks.ai'
-export const TAGLINE = 'Intelligent AI Automation for Modern Operations'
+export const COMPANY = 'Novarix'
+export const DOMAIN = 'novarix.ai'
+export const TAGLINE = "Enterprise Sovereign AI Automation Platform"
+export const SLOGAN = "Autonomous AI for Modern Enterprise Operations"
 
 export const NAV_LINKS = [
-  { href: '#solutions', label: 'Solutions' },
-  { href: '#how-it-works', label: 'How It Works' },
-  { href: '#industries', label: 'Industries' },
-  { href: '#case-studies', label: 'Workflows' },
-  { href: '#about', label: 'About' },
+  { href: '#products', label: 'Products' },
+  { href: '#playground', label: 'Playground' },
+  { href: '#developers', label: 'Developers' },
+  { href: '#platform', label: 'Platform' },
+  { href: '#enterprise', label: 'Enterprise' },
+  { href: '#research', label: 'Research' },
 ] as const

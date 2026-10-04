@@ -1,42 +1,280 @@
-import { ConsultButton, Button, Eyebrow } from './Button'
-import { HeroCanvas } from './HeroCanvas'
+import { useRef, type FC, type MouseEvent } from 'react'
+import { useConsult } from '../context/ConsultContext'
+import { ParticlesBackground } from './ParticlesBackground'
+import { IntegrationsShowcase } from './IntegrationsShowcase'
 
-export function Hero() {
+export const Hero: FC = () => {
+  const { openConsult } = useConsult()
+  const btnRef = useRef<HTMLButtonElement>(null)
+
+  const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
+    if (!btnRef.current) return
+    const rect = btnRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    btnRef.current.style.setProperty('--gx', `${x}px`)
+    btnRef.current.style.setProperty('--gy', `${y}px`)
+  }
+
   return (
-    <section className="hero" id="top">
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="wrap hero-inner">
-        <div className="hero-copy">
-          <Eyebrow>AI automation for modern businesses</Eyebrow>
-          <h1>
-            Turn Manual<br />
-            Work Into
-            {' '}
-            <span>Intelligent<br />Automation.</span>
-          </h1>
-          <p className="lede">
-            We design and deploy AI-powered workflows that eliminate repetitive
-            software work, reduce manual intervention, and help teams operate
-            faster at scale.
-          </p>
-          <p className="hero-fit">
-            <strong>Built for:</strong> operations teams at growing businesses
-            with repeatable work spread across multiple software systems.
-          </p>
-          <div className="hero-actions">
-            <ConsultButton>
-              Automate Your Workflow <span className="arrow">→</span>
-            </ConsultButton>
-            <Button variant="ghost" href="#solutions">
-              See What We Automate
-            </Button>
-          </div>
-          <p className="trust-line">
-            Built for teams that want software to do more — with less manual
-            intervention.
-          </p>
+    <section
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '160px',
+        minHeight: '94vh',
+        overflow: 'hidden',
+        backgroundColor: '#0C0B0C',
+      }}
+    >
+      {/* Superconscious Giant Slimy Blob Background Animation - Seamless Embedded Blend */}
+      <div
+        className="hero-video-area"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          controls={false}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.88,
+            mixBlendMode: 'screen',
+            filter: 'contrast(145%) brightness(0.85) saturate(175%)',
+          }}
+        >
+          <source src="/assets/blob-hero.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      {/* 4-Way Seamless Boundary Dissolve Gradients - Completely eradicates any rectangular border or layer cutoff */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(180deg, #0C0B0C 0%, rgba(12, 11, 12, 0.85) 12%, transparent 28%, transparent 72%, rgba(12, 11, 12, 0.9) 88%, #0C0B0C 100%), linear-gradient(90deg, #0C0B0C 0%, rgba(12, 11, 12, 0.85) 10%, transparent 25%, transparent 75%, rgba(12, 11, 12, 0.85) 90%, #0C0B0C 100%)',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
+
+      {/* Radial Center Aperture Vignette */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 75% 65% at 50% 45%, transparent 35%, rgba(12, 11, 12, 0.75) 65%, #0C0B0C 95%)',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
+
+      {/* Superconscious Cosmic Background Particles */}
+      <ParticlesBackground particleCount={55} />
+
+      {/* Superconscious Cosmic Blur Ellipse */}
+      <div className="cosmic-blur-ellipse" />
+
+      {/* Rotating Background Nebula Gradient */}
+      <div
+        className="card-gradient-point"
+        style={{
+          position: 'absolute',
+          top: '-15%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '750px',
+          height: '750px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0, 112, 243, 0.28) 0%, rgba(115, 34, 242, 0.2) 45%, transparent 70%)',
+          filter: 'blur(70px)',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Main Content Container */}
+      <div
+        className="container-sarvam"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          paddingBottom: '60px',
+        }}
+      >
+        {/* Floating User's Logo Emblem with Glowing Halo (Enlarged & Prominent) */}
+        <div
+          className="animate-glow-ring"
+          style={{
+            position: 'relative',
+            width: '128px',
+            height: '128px',
+            marginBottom: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {/* Pulsing Outer Aurora Halo */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: '-16px',
+              borderRadius: '35%',
+              background: 'radial-gradient(circle, rgba(0, 240, 255, 0.65) 0%, rgba(0, 112, 243, 0.4) 45%, rgba(115, 34, 242, 0.25) 70%, transparent 80%)',
+              filter: 'blur(22px)',
+              pointerEvents: 'none',
+            }}
+          />
+          <img
+            src="/assets/novarix-logo.png"
+            alt="Novarix"
+            style={{
+              position: 'relative',
+              zIndex: 2,
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              borderRadius: '30px',
+              filter: 'drop-shadow(0 0 25px rgba(0, 240, 255, 0.9)) drop-shadow(0 0 50px rgba(0, 112, 243, 0.6))',
+            }}
+          />
         </div>
-        <HeroCanvas />
+
+        {/* Top Tagline with Superconscious Glowing Radial Lines */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            marginBottom: '24px',
+          }}
+        >
+          <div
+            style={{
+              width: '280px',
+              height: '1px',
+              background: 'radial-gradient(circle, #00F0FF 0%, transparent 100%)',
+            }}
+          />
+          <p
+            style={{
+              fontFamily: 'var(--font-matter)',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: '#00F0FF',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              padding: '0 16px',
+              textShadow: '0 0 12px rgba(0, 240, 255, 0.4)',
+            }}
+          >
+            Sovereign Enterprise AI Automation Platform
+          </p>
+          <div
+            style={{
+              width: '280px',
+              height: '1px',
+              background: 'radial-gradient(circle, #00F0FF 0%, transparent 100%)',
+            }}
+          />
+        </div>
+
+        {/* Grand Headline in Season Mix */}
+        <h1
+          style={{
+            fontFamily: 'var(--font-season-mix)',
+            fontSize: 'clamp(42px, 5.8vw, 72px)',
+            fontWeight: 500,
+            lineHeight: 1.05,
+            letterSpacing: '-0.025em',
+            color: '#FFFFFF',
+            maxWidth: '960px',
+            marginBottom: '22px',
+            textShadow: '0 0 40px rgba(0, 112, 243, 0.3)',
+          }}
+        >
+          Autonomous AI for all from Novarix
+        </h1>
+
+        {/* Subtitle in Matter */}
+        <p
+          style={{
+            fontFamily: 'var(--font-matter)',
+            fontSize: 'clamp(17px, 2vw, 20px)',
+            fontWeight: 400,
+            lineHeight: 1.7,
+            color: 'rgba(255, 255, 255, 0.75)',
+            maxWidth: '700px',
+            marginBottom: '40px',
+          }}
+        >
+          Built on sovereign compute. Powered by frontier-class models.
+          <br className="hidden md:block" />
+          Delivering population-scale enterprise operational autonomy.
+        </p>
+
+        {/* Superconscious CTAs */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '18px',
+            marginBottom: '76px',
+          }}
+        >
+          <button
+            ref={btnRef}
+            type="button"
+            className="btn-superconscious-primary"
+            onMouseMove={handleMouseMove}
+            onClick={openConsult}
+            style={{ padding: '0.85rem 2rem', fontSize: '15.5px' }}
+          >
+            <span>Deploy Agents</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            className="btn-superconscious-secondary"
+            onClick={openConsult}
+            style={{ padding: '0.85rem 2rem', fontSize: '15.5px' }}
+          >
+            <span>Schedule Demo</span>
+          </button>
+        </div>
+
+        {/* Plug AI into your own data & over 500 integrations (n8n-style) with flowing apps/companies */}
+        <IntegrationsShowcase />
       </div>
     </section>
   )

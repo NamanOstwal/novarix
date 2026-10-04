@@ -825,4 +825,71 @@ button {
   will-change: transform, opacity;
 }
 
+/* ==========================================================================
+   Responsive Visibility & Layout Utilities (Pure CSS Replacements)
+   ========================================================================== */
+.hidden {
+  display: none !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.items-center {
+  align-items: center !important;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1 !important;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2 !important;
+}
+
+/* Desktop Breakpoints (min-width: 768px) */
+@media (min-width: 768px) {
+  .md\:hidden {
+    display: none !important;
+  }
+
+  .md\:block {
+    display: block !important;
+  }
+
+  .md\:flex {
+    display: flex !important;
+  }
+
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .md\:items-center {
+    align-items: center !important;
+  }
+
+  .md\:justify-between {
+    justify-content: space-between !important;
+  }
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2 !important;
+  }
+}
+
+
 

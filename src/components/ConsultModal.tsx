@@ -1,19 +1,18 @@
-import { useEffect, useId, useState, type FormEvent } from 'react'
+import { useEffect, useId, useState, type FormEvent, type FC } from 'react'
+import { X, CheckCircle2, Calendar, Send, ShieldCheck } from 'lucide-react'
 
-export function ConsultModal({
-  open,
-  onClose,
-}: {
+export const ConsultModal: FC<{
   open: boolean
   onClose: () => void
-}) {
+}> = ({ open, onClose }) => {
   const titleId = useId()
   const [sent, setSent] = useState(false)
   const [fullName, setFullName] = useState('')
   const [workEmail, setWorkEmail] = useState('')
   const [companyName, setCompanyName] = useState('')
-  const [useCase, setUseCase] = useState('voice-agents')
-  const [message, setMessage] = useState('')
+  const [companySize, setCompanySize] = useState('11-50')
+  const [selectedWorkflows, setSelectedWorkflows] = useState<string[]>(['AI Agents & Operations'])
+  const [problemDescription, setProblemDescription] = useState('')
 
   useEffect(() => {
     if (!open) {
@@ -31,12 +30,31 @@ export function ConsultModal({
     }
   }, [open, onClose])
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const toggleWorkflow = (name: string) => {
+    if (selectedWorkflows.includes(name)) {
+      if (selectedWorkflows.length > 1) {
+        setSelectedWorkflows(selectedWorkflows.filter((w) => w !== name))
+      }
+    } else {
+      setSelectedWorkflows([...selectedWorkflows, name])
+    }
+  }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSent(true)
   }
 
   if (!open) return null
+
+  const WORKFLOW_OPTIONS = [
+    'AI Agents & Operations',
+    'Enterprise RAG & Knowledge',
+    'Customer Support & Voice',
+    'Document Intelligence & OCR',
+    'Engineering & SRE Triage',
+    'Custom Sovereign AI'
+  ]
 
   return (
     <div
@@ -56,10 +74,10 @@ export function ConsultModal({
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundColor: 'rgba(30, 32, 51, 0.65)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          transition: 'opacity 0.2s ease',
+          backgroundColor: 'rgba(12, 11, 12, 0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          transition: 'opacity 0.25s ease',
         }}
         onClick={onClose}
       />
@@ -73,13 +91,13 @@ export function ConsultModal({
           position: 'relative',
           zIndex: 10,
           width: '100%',
-          maxWidth: '520px',
+          maxWidth: '580px',
           backgroundColor: '#121118',
           borderRadius: '24px',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          boxShadow: '0 24px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(0, 240, 255, 0.3)',
+          boxShadow: '0 24px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 112, 243, 0.25)',
           padding: 'clamp(24px, 4vw, 36px)',
-          maxHeight: '90vh',
+          maxHeight: '92vh',
           overflowY: 'auto',
           color: '#FFFFFF',
         }}
@@ -88,260 +106,295 @@ export function ConsultModal({
         <button
           type="button"
           onClick={onClose}
+          aria-label="Close modal"
           style={{
             position: 'absolute',
             top: '20px',
             right: '20px',
-            width: '32px',
-            height: '32px',
+            width: '34px',
+            height: '34px',
             borderRadius: '50%',
             backgroundColor: 'rgba(255, 255, 255, 0.06)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '18px',
             color: 'rgba(255, 255, 255, 0.7)',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#FFFFFF'
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)'
-          }}
-          aria-label="Close dialog"
         >
-          ×
+          <X size={18} />
         </button>
 
-        {sent ? (
-          <div style={{ textAlign: 'center', padding: '24px 12px' }}>
+        {!sent ? (
+          <div>
+            {/* Header */}
+            <div style={{ marginBottom: '24px' }}>
+              <div className="sc-telemetry-badge" style={{ marginBottom: '10px' }}>
+                <Calendar size={13} color="var(--neon-cyan)" />
+                <span>30-Minute AI Architecture Strategy Call</span>
+              </div>
+              <h3
+                id={titleId}
+                style={{
+                  fontFamily: 'var(--font-season-mix)',
+                  fontSize: 'clamp(24px, 3vw, 30px)',
+                  fontWeight: 500,
+                  color: '#FFFFFF',
+                  marginBottom: '6px',
+                }}
+              >
+                Book a Technical Consultation
+              </h3>
+              <p style={{ fontFamily: 'var(--font-matter)', fontSize: '14px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: 1.5 }}>
+                Connect directly with our engineering founders. We’ll map your manual workflow, evaluate data architecture, and discuss custom POC feasibility.
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              {/* Name & Work Email */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '6px' }}>
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Alex Morgan"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 14px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      color: '#FFFFFF',
+                      fontSize: '14px',
+                      fontFamily: 'var(--font-matter)',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '6px' }}>
+                    Work Email *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="alex@company.com"
+                    value={workEmail}
+                    onChange={(e) => setWorkEmail(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 14px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      color: '#FFFFFF',
+                      fontSize: '14px',
+                      fontFamily: 'var(--font-matter)',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Company Name & Team Size */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '6px' }}>
+                    Company Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Acme Enterprises"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 14px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      color: '#FFFFFF',
+                      fontSize: '14px',
+                      fontFamily: 'var(--font-matter)',
+                      outline: 'none',
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '6px' }}>
+                    Company Size
+                  </label>
+                  <select
+                    value={companySize}
+                    onChange={(e) => setCompanySize(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '11px 14px',
+                      borderRadius: '10px',
+                      backgroundColor: '#1C1B22',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      color: '#FFFFFF',
+                      fontSize: '14px',
+                      fontFamily: 'var(--font-matter)',
+                      outline: 'none',
+                    }}
+                  >
+                    <option value="1-10">1 – 10 employees</option>
+                    <option value="11-50">11 – 50 employees</option>
+                    <option value="51-200">51 – 200 employees</option>
+                    <option value="201-1000">201 – 1,000 employees</option>
+                    <option value="1000+">1,000+ enterprise</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* What are you looking to automate? */}
+              <div>
+                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '8px' }}>
+                  What are you looking to automate? (Select all that apply)
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '8px' }}>
+                  {WORKFLOW_OPTIONS.map((opt) => {
+                    const isChecked = selectedWorkflows.includes(opt)
+                    return (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => toggleWorkflow(opt)}
+                        style={{
+                          padding: '8px 12px',
+                          borderRadius: '8px',
+                          backgroundColor: isChecked ? 'rgba(0, 112, 243, 0.2)' : 'rgba(255, 255, 255, 0.03)',
+                          border: `1px solid ${isChecked ? 'var(--neon-cyan)' : 'rgba(255, 255, 255, 0.08)'}`,
+                          color: isChecked ? 'var(--neon-cyan)' : 'rgba(255, 255, 255, 0.7)',
+                          fontSize: '12px',
+                          fontWeight: isChecked ? 600 : 400,
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                        }}
+                      >
+                        {isChecked ? '✓ ' : '+ '} {opt}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Problem Description */}
+              <div>
+                <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.8)', marginBottom: '6px' }}>
+                  Tell us about your current manual workflow or operational problem:
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="e.g. Our operations team spends 20 hours a week manually matching PDF invoices to SAP purchase orders..."
+                  value={problemDescription}
+                  onChange={(e) => setProblemDescription(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '11px 14px',
+                    borderRadius: '10px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    color: '#FFFFFF',
+                    fontSize: '13.5px',
+                    fontFamily: 'var(--font-matter)',
+                    outline: 'none',
+                    resize: 'vertical',
+                  }}
+                />
+              </div>
+
+              {/* Submit CTA Button */}
+              <div style={{ marginTop: '8px' }}>
+                <button
+                  type="submit"
+                  className="btn-superconscious-primary"
+                  style={{ width: '100%', padding: '0.9rem 1.6rem', fontSize: '15px' }}
+                >
+                  <Send size={16} />
+                  <span>Confirm Consultation Request</span>
+                </button>
+              </div>
+
+              {/* Trust Footer */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>
+                <ShieldCheck size={14} color="#10B981" />
+                <span>NDA protected · Zero data training guarantee</span>
+              </div>
+            </form>
+          </div>
+        ) : (
+          /* Confirmation State */
+          <div style={{ textAlign: 'center', padding: '24px 0' }}>
             <div
               style={{
-                width: '56px',
-                height: '56px',
+                width: '64px',
+                height: '64px',
                 borderRadius: '50%',
                 backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
+                border: '1.5px solid #10B981',
                 color: '#10B981',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 20px',
-                fontSize: '24px',
-                boxShadow: '0 0 20px rgba(16, 185, 129, 0.25)',
+                boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)',
               }}
             >
-              ✓
+              <CheckCircle2 size={32} />
             </div>
-            <h2
-              id={titleId}
+
+            <h3
               style={{
                 fontFamily: 'var(--font-season-mix)',
-                fontSize: '28px',
+                fontSize: '26px',
                 fontWeight: 500,
                 color: '#FFFFFF',
                 marginBottom: '10px',
               }}
             >
-              Consultation Request Received
-            </h2>
-            <p style={{ fontFamily: 'var(--font-matter)', fontSize: '15px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: 1.6, marginBottom: '28px' }}>
-              Thank you for reaching out. A Novarix Forward Deployed AI Architect will contact you within 2 business hours to review your enterprise requirements.
+              Consultation Request Received!
+            </h3>
+
+            <p style={{ fontFamily: 'var(--font-matter)', fontSize: '15px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto 24px' }}>
+              Thank you, <strong>{fullName || 'there'}</strong>. Our engineering lead has received your workflow brief for <strong>{companyName || 'your company'}</strong>. We’ll reach out to <strong>{workEmail}</strong> within 4 business hours with calendar invites.
             </p>
-            <button type="button" className="btn-superconscious-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={onClose}>
-              Return to Platform
-            </button>
-          </div>
-        ) : (
-          <div>
-            <div style={{ marginBottom: '24px' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-matter)',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '1.5px',
-                  color: '#00F0FF',
-                  display: 'block',
-                  marginBottom: '6px',
-                }}
-              >
-                Forward Deployed Engineering
-              </span>
-              <h2
-                id={titleId}
-                style={{
-                  fontFamily: 'var(--font-season-mix)',
-                  fontSize: '28px',
-                  fontWeight: 500,
-                  color: '#FFFFFF',
-                  lineHeight: 1.2,
-                  marginBottom: '8px',
-                }}
-              >
-                Schedule an AI Strategy Session
-              </h2>
-              <p style={{ fontFamily: 'var(--font-matter)', fontSize: '14px', color: 'rgba(255, 255, 255, 0.65)' }}>
-                Explore production deployment of autonomous voice, document, or workflow agents.
-              </p>
+
+            <div
+              style={{
+                padding: '16px 20px',
+                borderRadius: '12px',
+                backgroundColor: 'rgba(0, 112, 243, 0.1)',
+                border: '1px solid rgba(0, 240, 255, 0.25)',
+                fontSize: '13px',
+                color: 'var(--neon-cyan)',
+                marginBottom: '24px',
+              }}
+            >
+              Selected Target Workflows: {selectedWorkflows.join(', ')}
             </div>
 
-            <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '6px' }}>
-                  Full Name *
-                </label>
-                <input
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Rahul Sharma"
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    outline: 'none',
-                    fontFamily: 'var(--font-matter)',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00F0FF')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
-                />
-              </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '6px' }}>
-                  Work Email *
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={workEmail}
-                  onChange={(e) => setWorkEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    outline: 'none',
-                    fontFamily: 'var(--font-matter)',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00F0FF')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '6px' }}>
-                    Company *
-                  </label>
-                  <input
-                    required
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    placeholder="Company name"
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      fontSize: '14px',
-                      color: '#FFFFFF',
-                      outline: 'none',
-                      fontFamily: 'var(--font-matter)',
-                      transition: 'border-color 0.2s',
-                    }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = '#00F0FF')}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '6px' }}>
-                    Primary Use Case
-                  </label>
-                  <select
-                    value={useCase}
-                    onChange={(e) => setUseCase(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      backgroundColor: '#1C1B22',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      fontSize: '14px',
-                      color: '#FFFFFF',
-                      outline: 'none',
-                      fontFamily: 'var(--font-matter)',
-                    }}
-                  >
-                    <option value="voice-agents" style={{ background: '#1C1B22', color: '#fff' }}>Autonomous Voice Agents</option>
-                    <option value="doc-digitisation" style={{ background: '#1C1B22', color: '#fff' }}>Document Intelligence & OCR</option>
-                    <option value="workflows" style={{ background: '#1C1B22', color: '#fff' }}>Workflow Orchestration</option>
-                    <option value="translation" style={{ background: '#1C1B22', color: '#fff' }}>Multilingual Translation</option>
-                    <option value="custom" style={{ background: '#1C1B22', color: '#fff' }}>Sovereign On-Premises VPC</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '6px' }}>
-                  Project Overview
-                </label>
-                <textarea
-                  rows={3}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Describe your operational volume or workflows you want to automate..."
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    outline: 'none',
-                    resize: 'none',
-                    fontFamily: 'var(--font-matter)',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00F0FF')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
-                />
-              </div>
-
-              <div style={{ marginTop: '8px' }}>
-                <button
-                  type="submit"
-                  className="btn-superconscious-primary"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                >
-                  Submit Consultation Request
-                </button>
-              </div>
-
-              <div style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255, 255, 255, 0.45)', marginTop: '4px' }}>
-                Protected by Novarix Enterprise Sovereign Privacy. Zero training on submitted inputs.
-              </div>
-            </form>
+            <button
+              type="button"
+              className="btn-superconscious-primary"
+              onClick={onClose}
+              style={{ padding: '0.75rem 2rem', fontSize: '14.5px' }}
+            >
+              <span>Back to Overview</span>
+            </button>
           </div>
         )}
       </div>

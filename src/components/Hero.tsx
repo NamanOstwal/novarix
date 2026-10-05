@@ -284,7 +284,7 @@ export const Hero: FC = () => {
           <p
             style={{
               fontFamily: 'var(--font-matter)',
-              fontSize: '14px',
+              fontSize: '13.5px',
               fontWeight: 600,
               color: '#00F0FF',
               letterSpacing: '0.08em',
@@ -293,7 +293,7 @@ export const Hero: FC = () => {
               textShadow: '0 0 12px rgba(0, 240, 255, 0.4)',
             }}
           >
-            Sovereign Enterprise AI Automation Platform
+            Production-Grade Enterprise AI Automation
           </p>
           <div
             style={{
@@ -308,34 +308,35 @@ export const Hero: FC = () => {
         <h1
           style={{
             fontFamily: 'var(--font-season-mix)',
-            fontSize: 'clamp(42px, 5.8vw, 72px)',
+            fontSize: 'clamp(40px, 5.5vw, 68px)',
             fontWeight: 500,
-            lineHeight: 1.05,
+            lineHeight: 1.08,
             letterSpacing: '-0.025em',
             color: '#FFFFFF',
-            maxWidth: '960px',
+            maxWidth: '940px',
             marginBottom: '22px',
             textShadow: '0 0 40px rgba(0, 112, 243, 0.3)',
           }}
         >
-          Autonomous AI for all from Novarix
+          AI Systems That Actually <br />
+          <span style={{ color: 'var(--neon-cyan)', textShadow: '0 0 30px rgba(0, 240, 255, 0.4)' }}>
+            Do the Work.
+          </span>
         </h1>
 
         {/* Subtitle in Matter */}
         <p
           style={{
             fontFamily: 'var(--font-matter)',
-            fontSize: 'clamp(17px, 2vw, 20px)',
+            fontSize: 'clamp(16.5px, 2vw, 19.5px)',
             fontWeight: 400,
-            lineHeight: 1.7,
-            color: 'rgba(255, 255, 255, 0.75)',
-            maxWidth: '700px',
-            marginBottom: '40px',
+            lineHeight: 1.65,
+            color: 'rgba(255, 255, 255, 0.78)',
+            maxWidth: '740px',
+            marginBottom: '36px',
           }}
         >
-          Built on sovereign compute. Powered by frontier-class models.
-          <br className="hidden md:block" />
-          Delivering population-scale enterprise operational autonomy.
+          We build autonomous AI agents, enterprise RAG systems, and workflow automation that connect directly into your business data, internal tools, and operations.
         </p>
 
         {/* Superconscious CTAs */}
@@ -346,7 +347,7 @@ export const Hero: FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '18px',
-            marginBottom: '76px',
+            marginBottom: '44px',
           }}
         >
           <button
@@ -355,23 +356,51 @@ export const Hero: FC = () => {
             className="btn-superconscious-primary"
             onMouseMove={handleMouseMove}
             onClick={openConsult}
-            style={{ padding: '0.85rem 2rem', fontSize: '15.5px' }}
+            style={{ padding: '0.9rem 2.2rem', fontSize: '16px' }}
           >
-            <span>Deploy Agents</span>
+            <span>Book a Demo</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14" />
               <path d="M12 5l7 7-7 7" />
             </svg>
           </button>
 
-          <button
-            type="button"
+          <a
+            href="#demo"
             className="btn-superconscious-secondary"
-            onClick={openConsult}
-            style={{ padding: '0.85rem 2rem', fontSize: '15.5px' }}
+            style={{ padding: '0.9rem 2.2rem', fontSize: '16px', textDecoration: 'none' }}
           >
-            <span>Schedule Demo</span>
-          </button>
+            <span>See Live Demo</span>
+          </a>
+        </div>
+
+        {/* Trust & Credibility Strip */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'clamp(14px, 2vw, 24px)',
+            padding: '12px 24px',
+            borderRadius: '9999px',
+            backgroundColor: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            marginBottom: '48px',
+            fontSize: '13px',
+            color: 'rgba(255, 255, 255, 0.75)',
+            fontFamily: 'var(--font-matter)',
+          }}
+        >
+          <span style={{ color: '#FFFFFF', fontWeight: 600 }}>Built by engineers. Designed for production.</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
+          <span style={{ color: 'var(--neon-cyan)' }}>AI Agents</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
+          <span>Enterprise RAG</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
+          <span style={{ color: '#34D399' }}>Zero Data Retention</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
+          <span>500+ Integrations</span>
         </div>
 
         {/* Plug AI into your own data & over 500 integrations (n8n-style) with flowing apps/companies */}

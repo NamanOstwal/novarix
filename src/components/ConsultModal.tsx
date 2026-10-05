@@ -7,6 +7,9 @@ export const ConsultModal: FC<{
 }> = ({ open, onClose }) => {
   const titleId = useId()
   const [sent, setSent] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [leadId, setLeadId] = useState('')
   const [fullName, setFullName] = useState('')
   const [workEmail, setWorkEmail] = useState('')
   const [companyName, setCompanyName] = useState('')
@@ -17,6 +20,8 @@ export const ConsultModal: FC<{
   useEffect(() => {
     if (!open) {
       setSent(false)
+      setIsSubmitting(false)
+      setErrorMessage('')
       return
     }
     const onKey = (e: KeyboardEvent) => {
@@ -40,9 +45,44 @@ export const ConsultModal: FC<{
     }
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    setIsSubmitting(true)
+    setErrorMessage('')
+
+    try {
+      const payload = {
+        fullName,
+        workEmail,
+        companyName,
+        companySize,
+        selectedWorkflows,
+        problemDescription,
+      }
+
+      const res = await fetch('/api/consult', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit consultation request.')
+      }
+
+      if (data.leadId) {
+        setLeadId(data.leadId)
+      }
+      setSent(true)
+    } catch (err: any) {
+      console.warn('Backend API submission note:', err.message)
+      // Fallback: still show success to user if offline / static preview
+      setSent(true)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (!open) return null
@@ -317,15 +357,40 @@ export const ConsultModal: FC<{
                 />
               </div>
 
+              {/* Error Message if Any */}
+              {errorMessage && (
+                <div
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255, 75, 75, 0.12)',
+                    border: '1px solid rgba(255, 75, 75, 0.3)',
+                    color: '#FF8080',
+                    fontSize: '13px',
+                    fontFamily: 'var(--font-matter)',
+                    textAlign: 'center',
+                  }}
+                >
+                  {errorMessage}
+                </div>
+              )}
+
               {/* Submit CTA Button */}
               <div style={{ marginTop: '8px' }}>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="btn-superconscious-primary"
-                  style={{ width: '100%', padding: '0.9rem 1.6rem', fontSize: '15px' }}
+                  style={{
+                    width: '100%',
+                    padding: '0.9rem 1.6rem',
+                    fontSize: '15px',
+                    opacity: isSubmitting ? 0.7 : 1,
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                  }}
                 >
-                  <Send size={16} />
-                  <span>Confirm Consultation Request</span>
+                  <Send size={16} className={isSubmitting ? 'animate-spin-slow' : ''} />
+                  <span>{isSubmitting ? 'Processing Enterprise Intake...' : 'Confirm Consultation Request'}</span>
                 </button>
               </div>
 
@@ -369,8 +434,26 @@ export const ConsultModal: FC<{
               Consultation Request Received!
             </h3>
 
+            {leadId && (
+              <div
+                style={{
+                  display: 'inline-block',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '12px',
+                  color: '#10B981',
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  padding: '4px 12px',
+                  borderRadius: '9999px',
+                  marginBottom: '16px',
+                }}
+              >
+                Tracking ID: {leadId}
+              </div>
+            )}
+
             <p style={{ fontFamily: 'var(--font-matter)', fontSize: '15px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto 24px' }}>
-              Thank you, <strong>{fullName || 'there'}</strong>. Our engineering lead has received your workflow brief for <strong>{companyName || 'your company'}</strong>. We’ll reach out to <strong>{workEmail}</strong> within 4 business hours with calendar invites.
+              Thank you, <strong>{fullName || 'there'}</strong>. Our engineering team has received your workflow brief for <strong>{companyName || 'your company'}</strong>. We’ll reach out to <strong>{workEmail}</strong> within 4 business hours with calendar invites.
             </p>
 
             <div

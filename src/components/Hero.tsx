@@ -127,9 +127,9 @@ export const Hero: FC = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              opacity: desktopVideoPlaying ? 0.92 : 0,
+              opacity: desktopVideoPlaying ? 0.72 : 0,
               transition: 'opacity 0.6s ease',
-              filter: 'contrast(135%) brightness(0.92) saturate(160%)',
+              filter: 'contrast(125%) brightness(0.62) saturate(135%)',
             }}
           >
             <source src="/assets/blob-hero.mp4" type="video/mp4" />
@@ -154,9 +154,9 @@ export const Hero: FC = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              opacity: mobileVideoPlaying ? 0.95 : 0,
+              opacity: mobileVideoPlaying ? 0.75 : 0,
               transition: 'opacity 0.6s ease',
-              filter: 'contrast(130%) brightness(0.95) saturate(165%)',
+              filter: 'contrast(125%) brightness(0.65) saturate(135%)',
             }}
           >
             <source src="/assets/blob-hero-mobile.mp4" type="video/mp4" />
@@ -171,21 +171,32 @@ export const Hero: FC = () => {
           position: 'absolute',
           inset: 0,
           background:
-            'linear-gradient(180deg, #0C0B0C 0%, rgba(12, 11, 12, 0.6) 12%, transparent 28%, transparent 72%, rgba(12, 11, 12, 0.75) 88%, #0C0B0C 100%), linear-gradient(90deg, #0C0B0C 0%, rgba(12, 11, 12, 0.6) 8%, transparent 24%, transparent 76%, rgba(12, 11, 12, 0.6) 92%, #0C0B0C 100%)',
+            'linear-gradient(180deg, #0C0B0C 0%, rgba(12, 11, 12, 0.7) 15%, transparent 32%, transparent 68%, rgba(12, 11, 12, 0.85) 85%, #0C0B0C 100%), linear-gradient(90deg, #0C0B0C 0%, rgba(12, 11, 12, 0.7) 10%, transparent 28%, transparent 72%, rgba(12, 11, 12, 0.7) 90%, #0C0B0C 100%)',
           pointerEvents: 'none',
           zIndex: 3,
         }}
       />
 
-      {/* Desktop Radial Center Aperture Vignette (hidden on mobile to prevent choking the phone screen) */}
+      {/* Central High-Contrast Dark Gradient Scrim (Tames middle brightness & guarantees 100% text readability) */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 70% 60% at 50% 48%, rgba(12, 11, 12, 0.82) 0%, rgba(12, 11, 12, 0.55) 45%, transparent 80%)',
+          pointerEvents: 'none',
+          zIndex: 4,
+        }}
+      />
+
+      {/* Desktop Radial Center Aperture Vignette */}
       <div
         className="hidden md:block"
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse 80% 70% at 50% 45%, transparent 40%, rgba(12, 11, 12, 0.6) 72%, #0C0B0C 98%)',
+          background: 'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, rgba(12, 11, 12, 0.65) 68%, #0C0B0C 98%)',
           pointerEvents: 'none',
-          zIndex: 3,
+          zIndex: 4,
         }}
       />
 
@@ -206,7 +217,7 @@ export const Hero: FC = () => {
           width: '750px',
           height: '750px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0, 112, 243, 0.28) 0%, rgba(115, 34, 242, 0.2) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 112, 243, 0.2) 0%, rgba(115, 34, 242, 0.15) 45%, transparent 70%)',
           filter: 'blur(70px)',
           zIndex: 0,
         }}
@@ -290,7 +301,7 @@ export const Hero: FC = () => {
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               padding: '0 16px',
-              textShadow: '0 0 12px rgba(0, 240, 255, 0.4)',
+              textShadow: '0 0 12px rgba(0, 240, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.8)',
             }}
           >
             Production-Grade Enterprise AI Automation
@@ -315,11 +326,11 @@ export const Hero: FC = () => {
             color: '#FFFFFF',
             maxWidth: '940px',
             marginBottom: '22px',
-            textShadow: '0 0 40px rgba(0, 112, 243, 0.3)',
+            textShadow: '0 4px 24px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 112, 243, 0.4)',
           }}
         >
           AI Systems That Actually <br />
-          <span style={{ color: 'var(--neon-cyan)', textShadow: '0 0 30px rgba(0, 240, 255, 0.4)' }}>
+          <span style={{ color: '#00F0FF', textShadow: '0 4px 20px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.6)' }}>
             Do the Work.
           </span>
         </h1>
@@ -331,9 +342,10 @@ export const Hero: FC = () => {
             fontSize: 'clamp(16.5px, 2vw, 19.5px)',
             fontWeight: 400,
             lineHeight: 1.65,
-            color: 'rgba(255, 255, 255, 0.78)',
+            color: 'rgba(255, 255, 255, 0.92)',
             maxWidth: '740px',
             marginBottom: '36px',
+            textShadow: '0 2px 14px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.8)',
           }}
         >
           We build autonomous AI agents, enterprise RAG systems, and workflow automation that connect directly into your business data, internal tools, and operations.
@@ -368,7 +380,16 @@ export const Hero: FC = () => {
           <a
             href="#demo"
             className="btn-superconscious-secondary"
-            style={{ padding: '0.9rem 2.2rem', fontSize: '16px', textDecoration: 'none' }}
+            style={{
+              padding: '0.9rem 2.2rem',
+              fontSize: '16px',
+              textDecoration: 'none',
+              backgroundColor: 'rgba(18, 17, 24, 0.85)',
+              border: '1px solid rgba(0, 240, 255, 0.4)',
+              color: '#FFFFFF',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 112, 243, 0.25)',
+              backdropFilter: 'blur(16px)',
+            }}
           >
             <span>See Live Demo</span>
           </a>
@@ -382,25 +403,28 @@ export const Hero: FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: 'clamp(14px, 2vw, 24px)',
-            padding: '12px 24px',
+            padding: '14px 28px',
             borderRadius: '9999px',
-            backgroundColor: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            backgroundColor: 'rgba(15, 14, 20, 0.85)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(0, 240, 255, 0.25)',
+            boxShadow: '0 12px 36px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
             marginBottom: '48px',
-            fontSize: '13px',
-            color: 'rgba(255, 255, 255, 0.75)',
+            fontSize: '13.5px',
+            color: 'rgba(255, 255, 255, 0.85)',
             fontFamily: 'var(--font-matter)',
           }}
         >
           <span style={{ color: '#FFFFFF', fontWeight: 600 }}>Built by engineers. Designed for production.</span>
           <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
-          <span style={{ color: 'var(--neon-cyan)' }}>AI Agents</span>
+          <span style={{ color: '#00F0FF', fontWeight: 600 }}>AI Agents</span>
           <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
-          <span>Enterprise RAG</span>
+          <span style={{ color: '#C4B5FD', fontWeight: 600 }}>Enterprise RAG</span>
           <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
-          <span style={{ color: '#34D399' }}>Zero Data Retention</span>
+          <span style={{ color: '#34D399', fontWeight: 600 }}>Zero Data Retention</span>
           <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>•</span>
-          <span>500+ Integrations</span>
+          <span style={{ color: '#93C5FD', fontWeight: 600 }}>500+ Integrations</span>
         </div>
 
         {/* Plug AI into your own data & over 500 integrations (n8n-style) with flowing apps/companies */}

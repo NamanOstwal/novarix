@@ -149,51 +149,127 @@ export const Preloader: FC<PreloaderProps> = ({ onLoaded }) => {
           padding: '0 24px',
         }}
       >
-        {/* Animated User Logo with Holographic Rings */}
+        {/* 3D Holographic Kinetic Logo Centerpiece */}
         <div
           style={{
             position: 'relative',
-            width: '160px',
-            height: '160px',
+            width: '190px',
+            height: '190px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            perspective: '1000px',
           }}
         >
-          {/* Outer Rotating Cyan Orbital Ring */}
+          {/* Pulsing Supernova Aurora Halo */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: '-20px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(0, 240, 255, 0.4) 0%, rgba(115, 34, 242, 0.25) 50%, transparent 75%)',
+              filter: 'blur(30px)',
+              transform: `scale(${1 + (progress / 100) * 0.35})`,
+              transition: 'transform 0.2s ease-out',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Outer Gyroscopic 3D Ring 1 - Cyan */}
           <div
             className="animate-spin-slow"
             style={{
               position: 'absolute',
               inset: 0,
               borderRadius: '9999px',
-              border: '1px dashed rgba(0, 240, 255, 0.45)',
-              boxShadow: '0 0 25px rgba(0, 240, 255, 0.3)',
+              border: '1.5px dashed rgba(0, 240, 255, 0.55)',
+              boxShadow: '0 0 30px rgba(0, 240, 255, 0.35), inset 0 0 15px rgba(0, 240, 255, 0.2)',
+              transform: 'rotateX(55deg) rotateY(15deg)',
             }}
           />
 
-          {/* Inner Counter-Rotating Violet Ring */}
+          {/* Outer Gyroscopic 3D Ring 2 - Violet Counter */}
           <div
             className="animate-spin-reverse-slow"
             style={{
               position: 'absolute',
-              inset: '16px',
+              inset: '12px',
               borderRadius: '9999px',
-              border: '1.5px solid rgba(151, 128, 255, 0.45)',
-              boxShadow: '0 0 20px rgba(115, 34, 242, 0.25)',
+              border: '1.5px solid rgba(151, 128, 255, 0.5)',
+              boxShadow: '0 0 25px rgba(115, 34, 242, 0.35)',
+              transform: 'rotateX(-45deg) rotateY(35deg)',
             }}
           />
 
-          {/* Embedded User Logo in Center with Ambient Glow */}
+          {/* Center Glowing Orbital Ring */}
+          <div
+            className="animate-spin-slow"
+            style={{
+              position: 'absolute',
+              inset: '24px',
+              borderRadius: '9999px',
+              border: '1px solid rgba(0, 112, 243, 0.6)',
+              boxShadow: '0 0 20px rgba(0, 112, 243, 0.4)',
+            }}
+          />
+
+          {/* 4 Orbiting Telemetry Energy Nodes */}
+          {[0, 90, 180, 270].map((deg, i) => (
+            <div
+              key={i}
+              className="animate-spin-slow"
+              style={{
+                position: 'absolute',
+                inset: '-4px',
+                transform: `rotate(${deg + (progress * 3.6)}deg)`,
+                pointerEvents: 'none',
+              }}
+            >
+              <div
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: i % 2 === 0 ? '#00F0FF' : '#9780FF',
+                  boxShadow: i % 2 === 0 ? '0 0 12px #00F0FF, 0 0 24px #00F0FF' : '0 0 12px #9780FF, 0 0 24px #9780FF',
+                  margin: '0 auto',
+                }}
+              />
+            </div>
+          ))}
+
+          {/* Embedded User Logo in Center with Holographic Scanner */}
           <div
             className="animate-pulse-glow"
             style={{
               position: 'relative',
               zIndex: 3,
-              width: '96px',
-              height: '96px',
+              width: '108px',
+              height: '108px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '26px',
+              overflow: 'hidden',
+              boxShadow: '0 0 35px rgba(0, 240, 255, 0.5), 0 0 70px rgba(0, 112, 243, 0.35)',
             }}
           >
+            {/* Holographic Laser Sweep Scanner */}
+            <div
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                height: '4px',
+                background: 'linear-gradient(90deg, transparent 0%, #00F0FF 50%, transparent 100%)',
+                boxShadow: '0 0 15px #00F0FF, 0 0 30px #00F0FF',
+                zIndex: 4,
+                top: `${(progress % 100)}%`,
+                transition: 'top 0.1s linear',
+                pointerEvents: 'none',
+              }}
+            />
+
             <img
               src="/assets/novarix-logo.png"
               alt="Novarix"
@@ -201,8 +277,10 @@ export const Preloader: FC<PreloaderProps> = ({ onLoaded }) => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
-                borderRadius: '24px',
-                filter: 'drop-shadow(0 0 22px rgba(0, 240, 255, 0.9)) drop-shadow(0 0 45px rgba(0, 112, 243, 0.6))',
+                borderRadius: '26px',
+                filter: 'drop-shadow(0 0 24px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 50px rgba(0, 112, 243, 0.7))',
+                transform: `scale(${0.9 + (progress / 100) * 0.15})`,
+                transition: 'transform 0.2s ease-out',
               }}
             />
           </div>

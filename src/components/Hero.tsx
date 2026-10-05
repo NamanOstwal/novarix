@@ -237,43 +237,104 @@ export const Hero: FC = () => {
           paddingBottom: '60px',
         }}
       >
-        {/* Floating User's Logo Emblem with Glowing Halo (Enlarged & Prominent) */}
+        {/* Floating User's Logo Emblem with Glowing 3D Holographic Orbitals */}
         <div
-          className="animate-glow-ring"
           style={{
             position: 'relative',
-            width: '128px',
-            height: '128px',
-            marginBottom: '28px',
+            width: '148px',
+            height: '148px',
+            marginBottom: '32px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            perspective: '1000px',
           }}
         >
           {/* Pulsing Outer Aurora Halo */}
           <div
             style={{
               position: 'absolute',
-              inset: '-16px',
-              borderRadius: '35%',
+              inset: '-24px',
+              borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(0, 240, 255, 0.65) 0%, rgba(0, 112, 243, 0.4) 45%, rgba(115, 34, 242, 0.25) 70%, transparent 80%)',
-              filter: 'blur(22px)',
+              filter: 'blur(26px)',
               pointerEvents: 'none',
             }}
           />
-          <img
-            src="/assets/novarix-logo.png"
-            alt="Novarix"
+
+          {/* 3D Cyan Orbit Gyroscope Ring */}
+          <div
+            className="animate-spin-slow"
+            style={{
+              position: 'absolute',
+              inset: '-10px',
+              borderRadius: '9999px',
+              border: '1.5px dashed rgba(0, 240, 255, 0.5)',
+              boxShadow: '0 0 25px rgba(0, 240, 255, 0.3)',
+              transform: 'rotateX(60deg)',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* 3D Violet Counter-Orbit Ring */}
+          <div
+            className="animate-spin-reverse-slow"
+            style={{
+              position: 'absolute',
+              inset: '-2px',
+              borderRadius: '9999px',
+              border: '1.5px solid rgba(151, 128, 255, 0.45)',
+              boxShadow: '0 0 20px rgba(115, 34, 242, 0.3)',
+              transform: 'rotateY(55deg)',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Orbiting Telemetry Micro-Pill */}
+          <div
+            className="animate-spin-slow"
+            style={{
+              position: 'absolute',
+              inset: '-18px',
+              pointerEvents: 'none',
+            }}
+          >
+            <div
+              style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                backgroundColor: '#00F0FF',
+                boxShadow: '0 0 14px #00F0FF, 0 0 28px #00F0FF',
+                margin: '0 auto',
+              }}
+            />
+          </div>
+
+          <div
+            className="animate-pulse-glow"
             style={{
               position: 'relative',
               zIndex: 2,
               width: '100%',
               height: '100%',
-              objectFit: 'contain',
-              borderRadius: '30px',
-              filter: 'drop-shadow(0 0 25px rgba(0, 240, 255, 0.9)) drop-shadow(0 0 50px rgba(0, 112, 243, 0.6))',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-          />
+          >
+            <img
+              src="/assets/novarix-logo.png"
+              alt="Novarix"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                borderRadius: '32px',
+                filter: 'drop-shadow(0 0 28px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 55px rgba(0, 112, 243, 0.65))',
+              }}
+            />
+          </div>
         </div>
 
         {/* Top Tagline with Superconscious Glowing Radial Lines */}

@@ -22,6 +22,8 @@ import { useSmoothScroll } from './hooks/useSmoothScroll'
 import { ScrollProgressBar } from './components/ScrollProgressBar'
 import { CosmicMouseGlow } from './components/CosmicMouseGlow'
 
+import { TransformationFlipDeck } from './components/TransformationFlipDeck'
+
 export default function App() {
   const [consultOpen, setConsultOpen] = useState(false)
   useScrollReveal()
@@ -52,10 +54,13 @@ export default function App() {
         {/* 3. Concrete Solutions (Problem -> Solution -> Result) */}
         <SolutionsSection />
 
-        {/* 4. Interactive Live Agent Simulator */}
+        {/* 4. Superconscious 3D Transformation Flip Matrix */}
+        <TransformationFlipDeck />
+
+        {/* 5. Interactive Live Agent Simulator */}
         <LiveAgentDemo />
 
-        {/* 5. Departmental Use Cases */}
+        {/* 6. Departmental Use Cases */}
         <UseCasesSection />
 
         {/* 6. How It Works (5-Stage Delivery Pipeline) */}

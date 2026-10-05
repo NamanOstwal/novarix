@@ -4,6 +4,7 @@ const SECTIONS = [
   { id: 'main', label: 'Overview' },
   { id: 'problem', label: 'The Problem' },
   { id: 'solutions', label: 'Solutions' },
+  { id: 'transformation-matrix', label: '3D Flip Matrix' },
   { id: 'demo', label: 'Live Agent' },
   { id: 'use-cases', label: 'Use Cases' },
   { id: 'how-it-works', label: 'How It Works' },

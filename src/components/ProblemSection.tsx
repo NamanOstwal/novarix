@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { Database, Layers, ShieldAlert, Cpu } from 'lucide-react'
+import { SplitBlurText } from './SplitBlurText'
 
 export const ProblemSection: FC = () => {
   return (
@@ -37,7 +38,7 @@ export const ProblemSection: FC = () => {
           <span>The Enterprise Dilemma</span>
         </div>
 
-        {/* Section Heading */}
+        {/* Section Heading with Kinetic Blur */}
         <h2
           style={{
             fontFamily: 'var(--font-season-mix)',
@@ -51,9 +52,14 @@ export const ProblemSection: FC = () => {
             marginBottom: '18px',
           }}
         >
-          Your business already has the data. <br />
+          <SplitBlurText direction="up" stagger={30}>
+            Your business already has the data.
+          </SplitBlurText>{' '}
+          <br />
           <span style={{ color: 'var(--neon-cyan)', textShadow: '0 0 25px rgba(0, 240, 255, 0.35)' }}>
-            The problem is getting AI to actually use it.
+            <SplitBlurText direction="up" stagger={30} delay={180}>
+              The problem is getting AI to actually use it.
+            </SplitBlurText>
           </span>
         </h2>
 

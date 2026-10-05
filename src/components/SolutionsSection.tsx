@@ -1,6 +1,7 @@
 import { useState, type FC } from 'react'
 import { Bot, Database, MessageSquare, FileSpreadsheet, Server, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useConsult } from '../context/ConsultContext'
+import { SplitBlurText } from './SplitBlurText'
 
 interface SolutionItem {
   id: string
@@ -122,7 +123,7 @@ export const SolutionsSection: FC = () => {
           <span>Enterprise AI Solutions</span>
         </div>
 
-        {/* Section Heading */}
+        {/* Section Heading with Kinetic Blur */}
         <h2
           style={{
             fontFamily: 'var(--font-season-mix)',
@@ -135,7 +136,9 @@ export const SolutionsSection: FC = () => {
             marginBottom: '14px',
           }}
         >
-          Targeted Systems Built for Real Business Value
+          <SplitBlurText direction="up" stagger={30}>
+            Targeted Systems Built for Real Business Value
+          </SplitBlurText>
         </h2>
 
         <p

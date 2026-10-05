@@ -18,15 +18,25 @@ import { FinalCtaSection } from './components/FinalCtaSection'
 import { Footer } from './components/Footer'
 import { ConsultModal } from './components/ConsultModal'
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { useSmoothScroll } from './hooks/useSmoothScroll'
+import { ScrollProgressBar } from './components/ScrollProgressBar'
+import { CosmicMouseGlow } from './components/CosmicMouseGlow'
 
 export default function App() {
   const [consultOpen, setConsultOpen] = useState(false)
   useScrollReveal()
+  useSmoothScroll()
 
   return (
     <ConsultProvider openConsult={() => setConsultOpen(true)}>
       {/* Creative Minimalist Preloader */}
       <Preloader />
+
+      {/* Cosmic Mouse Magnetic Ambient Glow */}
+      <CosmicMouseGlow />
+
+      {/* Luxury Scroll Laser HUD Progress Bar */}
+      <ScrollProgressBar />
 
       {/* Top Navbar */}
       <Navbar />

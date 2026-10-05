@@ -1,5 +1,6 @@
 import { useState, type FC } from 'react'
 import { Database, Shield, Cpu, Zap, Network, CheckCircle2 } from 'lucide-react'
+import { SplitBlurText } from './SplitBlurText'
 
 export const ArchitectureSection: FC = () => {
   const [activeLayer, setActiveLayer] = useState<number>(2)
@@ -66,7 +67,7 @@ export const ArchitectureSection: FC = () => {
           <span>Enterprise Technical Architecture</span>
         </div>
 
-        {/* Section Heading */}
+        {/* Section Heading with Kinetic Blur */}
         <h2
           style={{
             fontFamily: 'var(--font-season-mix)',
@@ -79,7 +80,9 @@ export const ArchitectureSection: FC = () => {
             marginBottom: '14px',
           }}
         >
-          Engineered for Production Reliability
+          <SplitBlurText direction="up" stagger={30}>
+            Engineered for Production Reliability
+          </SplitBlurText>
         </h2>
 
         <p

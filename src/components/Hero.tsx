@@ -3,6 +3,7 @@ import { useConsult } from '../context/ConsultContext'
 import { ParticlesBackground } from './ParticlesBackground'
 import { SlimyBlobCanvas } from './SlimyBlobCanvas'
 import { IntegrationsShowcase } from './IntegrationsShowcase'
+import { SplitBlurText } from './SplitBlurText'
 
 export const Hero: FC = () => {
   const { openConsult } = useConsult()
@@ -315,7 +316,7 @@ export const Hero: FC = () => {
           />
         </div>
 
-        {/* Grand Headline in Season Mix */}
+        {/* Grand Headline in Season Mix with Superconscious Kinetic Blur-In */}
         <h1
           style={{
             fontFamily: 'var(--font-season-mix)',
@@ -329,9 +330,14 @@ export const Hero: FC = () => {
             textShadow: '0 4px 24px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 112, 243, 0.4)',
           }}
         >
-          AI Systems That Actually <br />
+          <SplitBlurText direction="up" stagger={40} delay={100}>
+            AI Systems That Actually
+          </SplitBlurText>{' '}
+          <br />
           <span style={{ color: '#00F0FF', textShadow: '0 4px 20px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.6)' }}>
-            Do the Work.
+            <SplitBlurText direction="up" stagger={40} delay={300}>
+              Do the Work.
+            </SplitBlurText>
           </span>
         </h1>
 

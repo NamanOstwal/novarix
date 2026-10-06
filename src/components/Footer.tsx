@@ -1,10 +1,46 @@
-import type { FC } from 'react'
+import { useState, type FC, type FormEvent } from 'react'
 import { NovarixLogo } from './NovarixLogo'
 import { useConsult } from '../context/ConsultContext'
-import { Mail, ShieldCheck, ArrowUpRight } from 'lucide-react'
+import { Mail, ShieldCheck, ArrowUpRight, Send, CheckCircle2 } from 'lucide-react'
 
 export const Footer: FC = () => {
   const { openConsult } = useConsult()
+  const [subEmail, setSubEmail] = useState('')
+  const [isSubscribing, setIsSubscribing] = useState(false)
+  const [subSuccess, setSubSuccess] = useState(false)
+  const [subError, setSubError] = useState('')
+
+  const handleSubscribe = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!subEmail || !subEmail.includes('@')) {
+      setSubError('Please enter a valid email address.')
+      return
+    }
+    setIsSubscribing(true)
+    setSubError('')
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: subEmail }),
+      })
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        setSubError(data.error || 'Failed to subscribe. Please try again.')
+        return
+      }
+
+      setSubSuccess(true)
+      setSubEmail('')
+    } catch (err: any) {
+      console.error('Newsletter subscribe error:', err)
+      setSubError('Connection error. Please try again.')
+    } finally {
+      setIsSubscribing(false)
+    }
+  }
 
   return (
     <footer
@@ -141,37 +177,89 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
-          {/* Col 4: Company */}
+          {/* Col 4: Newsletter & Direct Intake */}
           <div>
             <h4 style={{ fontFamily: 'var(--font-matter)', fontSize: '14px', fontWeight: 700, color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '18px' }}>
-              Company & Contact
+              Engineering Briefs
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13.5px' }}>
-              <li><a href="#team" style={{ color: 'rgba(255, 255, 255, 0.65)', textDecoration: 'none' }}>About the Team</a></li>
-              <li><a href="#how-it-works" style={{ color: 'rgba(255, 255, 255, 0.65)', textDecoration: 'none' }}>How It Works</a></li>
-              <li><a href="#faq" style={{ color: 'rgba(255, 255, 255, 0.65)', textDecoration: 'none' }}>FAQ</a></li>
-              <li>
-                <button
-                  type="button"
-                  onClick={openConsult}
-                  style={{
-                    color: 'var(--neon-cyan)',
-                    background: 'none',
-                    border: 'none',
-                    padding: 0,
-                    cursor: 'pointer',
-                    fontSize: '13.5px',
-                    fontFamily: 'var(--font-matter)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                  }}
-                >
-                  <span>Book Consultation</span>
-                  <ArrowUpRight size={14} />
-                </button>
-              </li>
-            </ul>
+            <p style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.5, marginBottom: '14px' }}>
+              Get monthly architectural benchmarks and sovereign AI release notes.
+            </p>
+
+            {subSuccess ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#10B981', fontSize: '13px', padding: '8px 0' }}>
+                <CheckCircle2 size={16} />
+                <span>Subscribed to research briefings!</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', gap: '6px' }}>
+                  <input
+                    type="email"
+                    required
+                    placeholder="engineer@enterprise.com"
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)}
+                    style={{
+                      flex: 1,
+                      minWidth: 0,
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      color: '#FFFFFF',
+                      fontSize: '12.5px',
+                      outline: 'none',
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubscribing}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      backgroundColor: 'var(--neon-cyan)',
+                      color: '#070608',
+                      border: 'none',
+                      fontWeight: 700,
+                      fontSize: '12.5px',
+                      cursor: isSubscribing ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <Send size={13} />
+                  </button>
+                </div>
+                {subError && (
+                  <span style={{ fontSize: '11.5px', color: '#FF7070' }}>{subError}</span>
+                )}
+              </form>
+            )}
+
+            <div style={{ marginTop: '16px' }}>
+              <button
+                type="button"
+                onClick={openConsult}
+                style={{
+                  color: 'var(--neon-cyan)',
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  fontFamily: 'var(--font-matter)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontWeight: 600,
+                }}
+              >
+                <span>Book Technical Consultation</span>
+                <ArrowUpRight size={14} />
+              </button>
+            </div>
           </div>
         </div>
 

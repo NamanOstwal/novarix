@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "test": "node test-backend.ts",
+    "leads": "node scripts/view-leads.ts",
     "preview": "vite preview"
   },
   "dependencies": {

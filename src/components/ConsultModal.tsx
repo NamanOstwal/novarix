@@ -69,7 +69,8 @@ export const ConsultModal: FC<{
       const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit consultation request.')
+        setErrorMessage(data.error || 'Failed to submit consultation request. Please verify inputs.')
+        return
       }
 
       if (data.leadId) {
@@ -77,9 +78,8 @@ export const ConsultModal: FC<{
       }
       setSent(true)
     } catch (err: any) {
-      console.warn('Backend API submission note:', err.message)
-      // Fallback: still show success to user if offline / static preview
-      setSent(true)
+      console.error('Backend API submission error:', err)
+      setErrorMessage(err.message || 'Network error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
